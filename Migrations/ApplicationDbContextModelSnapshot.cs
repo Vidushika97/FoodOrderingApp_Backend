@@ -42,15 +42,10 @@ namespace FoodOrderingApp.Migrations
                     b.Property<int>("restaurant_id")
                         .HasColumnType("int");
 
-                    b.Property<long>("restaurant_id1")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime>("updated_at")
                         .HasColumnType("datetime(6)");
 
                     b.HasKey("food_id");
-
-                    b.HasIndex("restaurant_id1");
 
                     b.ToTable("Food_Items");
                 });
@@ -114,6 +109,10 @@ namespace FoodOrderingApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
+                    b.Property<string>("contact_number")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("created_at")
                         .HasColumnType("datetime(6)");
 
@@ -133,8 +132,16 @@ namespace FoodOrderingApp.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
+                    b.Property<string>("role")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<DateTime>("updated_at")
                         .HasColumnType("datetime(6)");
+
+                    b.Property<string>("user_address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("username")
                         .IsRequired()
@@ -143,22 +150,6 @@ namespace FoodOrderingApp.Migrations
                     b.HasKey("user_id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("FoodOrderingApp.Models.FoodItemModel", b =>
-                {
-                    b.HasOne("FoodOrderingApp.Models.RestaurantModel", "Restaurant")
-                        .WithMany("FoodItems")
-                        .HasForeignKey("restaurant_id1")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Restaurant");
-                });
-
-            modelBuilder.Entity("FoodOrderingApp.Models.RestaurantModel", b =>
-                {
-                    b.Navigation("FoodItems");
                 });
 #pragma warning restore 612, 618
         }
